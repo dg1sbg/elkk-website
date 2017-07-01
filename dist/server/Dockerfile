@@ -1,5 +1,5 @@
 FROM openjdk:7
-COPY ./target/uberjar /usr/src/elkkweb-server
+COPY ./build /usr/src/elkkweb-server
 WORKDIR /usr/src/elkkweb-server
 
 # ENV ELKKWEB_RESOURCES_DIR
