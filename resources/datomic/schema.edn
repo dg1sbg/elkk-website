@@ -1,0 +1,27 @@
+[{:db/id #db/id[:db.part/db]
+  :db/ident :component/name
+  :db/valueType :db.type/string
+  :db/cardinality :db.cardinality/one
+  :db/doc "Name of the component"
+  :db.install/_attribute :db.part/db}
+
+ {:db/id #db/id[:db.part/db]
+  :db/ident :component/body
+  :db/valueType :db.type/string
+  :db/cardinality :db.cardinality/one
+  :db/doc "Body of the component (component function)"
+  :db.install/_attribute :db.part/db}
+
+ {:db/id #db/id[:db.part/db]
+  :db/ident :cssrule/name
+  :db/valueType :db.type/string
+  :db/cardinality :db.cardinality/one
+  :db/doc "Name of the css rule"
+  :db.install/_attribute :db.part/db}
+
+ {:db/id #db/id[:db.part/db]
+  :db/ident :cssrule/body
+  :db/valueType :db.type/string
+  :db/cardinality :db.cardinality/one
+  :db/doc "Body of the css rule"
+  :db.install/_attribute :db.part/db}]
