@@ -1,0 +1,35 @@
+# ============================================================================
+#  DOCKER-COMPOSE FILE for SERVICE ELKKWEB
+# ============================================================================
+
+version: "A.01.00"
+
+services:
+
+  datomic-postgres:
+    image: gbt/datomic-postgres
+    build:
+      context: .
+      dockerfile: dockerfiles/datomic-postgres.dockerfile
+    depends-on:
+      - postgres
+
+  datomic:
+    image: gbt/datomic
+    build:
+      context: .
+      dockerfile: dockerfiles/datomic.dockerfile
+    depends-on:
+      - gbt/datonic-postgres
+
+  elkkweb:
+    image: gbt/elkkweb
+    build:
+      context: .
+      dockerfile: dockerfiles/elkkweb.dockerfile
+    depends-on:
+      - gbt/datomic
+    ports:
+      - "80:80"
+      - "443:443"
+      - "3000:3000"
