@@ -122,5 +122,6 @@
   (let [conn (db-core/startup-in-memory-db env)]
    (def conn conn))
   #_(db-api/transact conn (setup/init-data conn))
-  (serve app {:port (env "ELKKWEB_SERVER_PORT")})
+  (serve app {:port (env "ELKKWEB_SERVER_PORT")
+              :open-browser? false})
   (println "started server"))
