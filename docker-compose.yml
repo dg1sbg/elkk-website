@@ -1,0 +1,46 @@
+version: "3"
+
+networks:
+  elkkweb-net:
+
+services:
+
+  datomic-postgres:
+    image: gbt/datomic-postgres
+    build:
+      context: .
+      dockerfile: dockerfiles/datomic-postgres.dockerfile
+    ports:
+      - "5432:5432"
+    networks:
+      - elkkweb-net
+
+  datomic:
+    image: gbt/datomic
+    build:
+      context: .
+      dockerfile: dockerfiles/datomic-pro.dockerfile
+    depends_on:
+      - datomic-postgres
+    ports:
+      - "4334:4334"
+      - "4335:4335"
+      - "4336:4336"
+    deploy:
+      replicas: 1
+    networks:
+      - elkkweb-net
+
+  elkkweb:
+    image: gbt/elkkweb
+    build:
+      context: .
+      dockerfile: dockerfiles/elkkweb.dockerfile
+    depends_on:
+      - datomic
+    ports:
+      - "443:443"
+    deploy:
+      replicas: 1
+    networks:
+      - elkkweb-net

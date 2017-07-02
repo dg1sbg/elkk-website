@@ -1,22 +1,22 @@
 # ============================================================================
-#  DOCKERFILE for ELKKWEB
+#  DOCKERFILE for NGINX (for ELKKWEB)
 # ============================================================================
 
 # ----------------------------------------------------------------------------
 #  BASIC IMAGE REFERENCE
 # ----------------------------------------------------------------------------
 
-FROM debian:stable
+FROM nginx
 
 # ----------------------------------------------------------------------------
 #  IMAGE METADATA
 # ----------------------------------------------------------------------------
 
-LABEL title="ElKK WEB - http://www.eldoret-kids.de"
-LABEL description="Web Site of Eldoret Kids Kenia e.V., Bempflingen, Germany"
+LABEL title="NGINX Dockefile for ELKKWEB"
+LABEL description="Dockerfile for setting up NGINX for the ELKKWEB website."
 LABEL version="A.01.00"
-LABEL maintainer="Marian Goenninger <marian.goenninger@goenninger.net>"
-LABEL disclaimer="This website is displaying the project description and general information of a not-for-profit charity organization that supports street children in Kenya. The website is hosted in Germany. German law applies in all cases and under all circumstances. By visiting this website you agree to these regulations."
+LABEL maintainer="Frank Goenninger <frankn.goenninger@goenninger.net>"
+LABEL disclaimer="Tbis packages is copyright Goenninger B&T UG, Germany. German law applies in all cases and under all circumstances. By using this package you agree to these terms."
 
 # ----------------------------------------------------------------------------
 #  SETUP
