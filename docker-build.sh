@@ -34,16 +34,9 @@ then
     exit $RC
 fi
 
-echo "Done - Exiting."
-echo "READY."
+echo "*** PHASE 3: ELKKWEB"
 echo
-exit
-
-# ----- NOT REACHED ...
-
-echo "*** PHASE 3: NGINX for ELKKWEB"
-echo
-CMD="docker build -f dockerfiles/nginx.dockerfile -t gbt/elkkweb-nginx:dev_a0100 -t gbt/elkkweb-nginxc:latest --force-rm=true --squash=true ."
+CMD="docker build -f dockerfiles/elkkweb.dockerfile -t gbt/elkkweb:dev_a0100 -t gbt/elkkweb:latest --force-rm=true --squash=true ."
 echo $CMD
 $CMD
 RC=$?
@@ -52,3 +45,8 @@ then
     echo "FAILED: $CMD ... - ABORTING !!!"
     exit $RC
 fi
+
+echo "Done - Exiting."
+echo "READY."
+echo
+exit
