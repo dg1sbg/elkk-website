@@ -17,3 +17,4 @@ ALTER TABLE datomic_kvs
  OWNER TO postgres;
 GRANT ALL ON TABLE datomic_kvs TO postgres;
 GRANT ALL ON TABLE datomic_kvs TO public;
+COMMIT;
