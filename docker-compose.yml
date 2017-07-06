@@ -11,7 +11,7 @@ services:
       context: .
       dockerfile: dockerfiles/datomic-postgres.dockerfile
     ports:
-      - "5432:5432"
+      - "5428:5432"
     networks:
       - elkkweb-net
 
@@ -21,7 +21,7 @@ services:
       context: .
       dockerfile: dockerfiles/datomic-pro.dockerfile
     depends_on:
-      - datomic-postgres
+      - "datomic-postgres"
     ports:
       - "4334:4334"
       - "4335:4335"
@@ -37,9 +37,10 @@ services:
       context: .
       dockerfile: dockerfiles/elkkweb.dockerfile
     depends_on:
-      - datomic
+      - "datomic"
     ports:
       - "443:443"
+      - "3003:3003"
     deploy:
       replicas: 1
     networks:

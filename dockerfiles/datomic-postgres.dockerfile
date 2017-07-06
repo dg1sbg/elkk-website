@@ -62,9 +62,7 @@ RUN chown -R ${POSTGRES_USER}:${POSTGRES_GROUP}  ${POSTGRES_DATA_ROOT}
 
 # --- POSTGRES SETUP ---
 
-COPY db/datomic/sql/postgres-db.sql /docker-entrypoint-initdb.d/postgres-db.sql
-COPY db/datomic/sql/postgres-table.sql /docker-entrypoint-initdb.d/postgres-table.sql
-COPY db/datomic/sql/postgres-user.sql /docker-entrypoint-initdb.d/postres-user.sql
+COPY db/datomic/sql/ /docker-entrypoint-initdb.d/
 
 # --- EXPOSURE ---
 

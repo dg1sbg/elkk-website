@@ -28,7 +28,7 @@
    "ELKKWEB_INFOLETTER_DIR" (or (System/getenv "ELKKWEB_INFOLETTER_DIR")
                                 "/Users/mago/Desktop/elkk_res/public/rundbriefe")
    "ELKKWEB_SERVER_PORT" (or (System/getenv "ELKKWEB_SERVER_PORT")
-                             8090)
+                             "8090")
    "ELKKWEB_DATOMIC_URI" (or (System/getenv "ELKKWEB_DATOMIC_URI")
                              "datomic:mem://meta-frontend")})
 
@@ -122,6 +122,6 @@
   (let [conn (db-core/startup-in-memory-db env)]
    (def conn conn))
   #_(db-api/transact conn (setup/init-data conn))
-  (serve app {:port (env "ELKKWEB_SERVER_PORT")
+  (serve app {:port (read-string (env "ELKKWEB_SERVER_PORT"))
               :open-browser? false})
   (println "started server"))

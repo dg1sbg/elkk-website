@@ -83,4 +83,5 @@
       conn)))
 
 
+
 ;; AWS URI: datomic:ddb://eu-central-1/eldoret-kids.de/ELKKDEP1

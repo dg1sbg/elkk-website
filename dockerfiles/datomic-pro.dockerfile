@@ -61,7 +61,7 @@ RUN adduser  --uid 50002 --gid 50002 --disabled-password --disabled-login ${DATO
 
 RUN chown -R ${DATOMIC_USER}:${DATOMIC_GROUP}  ${DATOMIC_DATA_ROOT}
 
-VOLUME /var/data/db/datomic
+# VOLUME /var/data/db/datomic
 
 ENV DATOMIC_VERSION 0.9.5561
 ENV DATOMIC_HOME /opt/datomic-pro-$DATOMIC_VERSION
@@ -104,7 +104,7 @@ ENTRYPOINT ["bin/transactor"]
 
 # --- EXPOSURE ---
 
-VOLUME $DATOMIC_DATA
+# VOLUME $DATOMIC_DATA
 
 EXPOSE 4334 4335 4336 ${PGPORT}
 

@@ -41,10 +41,10 @@ RUN apt-get update && apt-get install -y \
 ENV ELKKWEB_HOME /opt/elkkweb
 ENV ELKKWEB_DATA_ROOT /var/data/www/elkkweb
 ENV ELKKWEB_INFOLETTER_DIR ${ELKKWEB_DATA_ROOT}/newsletters
-ENV ELKKWEB_RESOURCE_DIR ${ELKKWEB_DATA_ROOT}/resources
+ENV ELKKWEB_RESOURCES_DIR ${ELKKWEB_DATA_ROOT}/resources
 ENV ELKKWEB_LIB_DIR ${ELKKWEB_HOME}/lib
-ENV ELKKWEB_PORT 3000
-ENV ELKKWEB_DATOMIC_URI http://dont-know.de
+ENV ELKKWEB_SERVER_PORT 3003
+ENV ELKKWEB_DATOMIC_URI datomic:sql://elkkwebdb?jdbc:postgresql://datomic-postgres.datomic-postgres.elkkweb.github10.node.intern:5432/datomic?user=datomic&password=dt619pa7_ie4viydt__
 ENV ELKKWEB_USER elkkweb
 ENV ELKKWEB_GROUP elkkweb
 ENV ELKKWEB_JARFILE_VERSION 0.1.0
@@ -60,7 +60,7 @@ ENV ELKKWEB_JARFILE server-${ELKKWEB_JARFILE_VERSION}-SNAPSHOT-standalone.jar
 
 RUN mkdir -p ${ELKKWEB_DATA_ROOT}
 RUN mkdir -p ${ELKKWEB_INFOLETTER_DIR}
-RUN mkdir -p ${ELKKWEB_RESOURCE_DIR}
+RUN mkdir -p ${ELKKWEB_RESOURCES_DIR}
 RUN mkdir -p ${ELKKWEB_HOME}
 
 # --- USER & GROUP SETUP ---
@@ -72,9 +72,9 @@ RUN chown -R ${ELKKWEB_USER}:${ELKKWEB_GROUP}  ${ELKKWEB_DATA_ROOT}
 
 # --- SETUP CONTENT ---
 
-ONBUILD ADD ${ELKKWEB_HOME}/lib
+RUN mkdir ${ELKKWEB_HOME}/lib
 
-COPY resources ${ELKKWEB_HOME}/resources
+COPY resources/elkk_res/public ${ELKKWEB_RESOURCES_DIR}
 COPY src ${ELKKWEB_HOME}/src
 COPY build/${ELKKWEB_JARFILE} ${ELKKWEB_HOME}/lib/${ELKKWEB_JARFILE}
 
@@ -84,18 +84,18 @@ RUN chown -R ${ELKKWEB_USER}:${ELKKWEB_GROUP}  ${ELKKWEB_HOME}
 # --- EXPOSURE ---
 
 VOLUME ${ELKKWEB_DATA_ROOT}
-VOLUME ${ELKKWEB_INFOLETTER_DIR}
-VOLUME ${ELKKWEB_RESOURCE_DIR}
-VOLUME ${ELKKWEB_HOME}
+# VOLUME ${ELKKWEB_INFOLETTER_DIR}
+# VOLUME ${ELKKWEB_RESOURCES_DIR}
+# VOLUME ${ELKKWEB_HOME}
 
-EXPOSE 3000
+EXPOSE 3003
 
 USER ${ELKKWEB_USER}
 
 # --- RUN ---
 
 WORKDIR ${ELKKWEB_HOME}
-ENTRYPOINT ["java", "-jar"]
+# ENTRYPOINT ["java", "-jar"]
 
 # ----------------------------------------------------------------------------
 #  START RUNTIME
@@ -103,4 +103,4 @@ ENTRYPOINT ["java", "-jar"]
 
 # --- ELKKWEB STARTUP ---
 
-CMD ["${ELKKWEB_LIBDIR}/${ELKKWEB_JARFILE}"]
+CMD java -jar ${ELKKWEB_LIB_DIR}/${ELKKWEB_JARFILE}
