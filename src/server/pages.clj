@@ -33,7 +33,7 @@
     [:div
      {:class
       "col-lg-6 col-md-6 header-right col-xs-12 col-sm-12 header-row flexbox"}
-     [:a {:href (str "rundbriefe/" (db-api/get-current-rundbrief-name db))
+     [:a {:href (str "/rundbriefe/" (db-api/get-current-rundbrief-name db))
           :class "flex-1 rundbrief-span flexbox"}
        [:img
         {:src "resources/iconmonstr-note-19-240.png", :class "header-right-img"}]
@@ -486,7 +486,8 @@
          "\nEs gibt außerdem die Möglichkeit, online zu spenden. Betterplace.org ist eine Online-Spendenplattform für gemeinnützige Projekte und übernimmt für uns die Spendenabwicklung."
          [:br {}]
          [:br {}]
-         [:button {:class "button"} "Zum Spendenformular"]
+         [:a {:href "https://www.betterplace.org/de/projects/35529/client_donations/new?client_id=sk-esslingen-nuertingen#eft"}
+          [:button {:class "button"} "Zum Spendenformular"]]
          [:br {}]
          [:br {}]
          "\nFalls Sie per Überweisung spenden, erhalten Sie am Ende des Jahres eine Spendenbescheinigung zugesandt.\nVermerken Sie deshalb bitte Ihre Adresse im Feld \"Bemerkungen\" auf dem Überweisungsformular.\nBei einer Online-Spende erhalten Sie Ihre Spendenbescheinigung von betterplace.org."]
@@ -538,7 +539,8 @@
         "\n                            "
         [:br {}]
         "\n                            "
-        [:button {:class "button"} "Patenschaftsantrag"]
+        [:a {:href "/resources/patenschaftsantrag.pdf"}
+         [:button {:class "button"} "Patenschaftsantrag"]]
         "                             \n                        "]
        "\n                    "]
       "\n                    "
@@ -603,6 +605,7 @@
         "\n                            "
         [:br {}]
         "\n                            "
+        [:a {:href "/resources/mitgliedschaftsantrag.pdf"}]
         [:button {:class "button"} "Mitgliedschaftsantrag"]
         "                             \n                        "]
        "\n                    "]
@@ -748,7 +751,7 @@
      [:a
       {:class
        "section col-sm-4 col-xs-4 col-md-3 col-lg-3 footerelement"
-       :href (str "resources/rundbriefe/" (db-api/get-current-rundbrief-name db))}
+       :href (str "/rundbriefe/" (db-api/get-current-rundbrief-name db))}
       [:span {:class "footerlink"} "Rundbrief"]]]
     [:div
      {:class "row"}

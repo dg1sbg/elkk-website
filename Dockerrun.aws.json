@@ -1,0 +1,16 @@
+{
+  "AWSEBDockerrunVersion": "1",
+  "Ports": [
+    {
+      "ContainerPort": "3003",
+      "HostPort": "80"
+    }
+  ],
+  "Volumes": [
+    {
+      "HostDirectory": "/var/app/elkkweb",
+      "ContainerDirectory": "/var/data/www/elkkweb"
+    }
+  ],
+  "Logging": "/var/log/nginx"
+}
