@@ -2,8 +2,7 @@
   "AWSEBDockerrunVersion": "1",
   "Ports": [
     {
-      "ContainerPort": "3003",
-      "HostPort": "80"
+      "ContainerPort": "3003"
     }
   ],
   "Volumes": [
