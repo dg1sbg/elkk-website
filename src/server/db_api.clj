@@ -1,8 +1,5 @@
 (ns server.db-api
    (:require [datomic.api :as d]
-             [server.remote :as remote]
-             [clojure.spec :as s]
-             [clojure.core.async :as async]
              [clj-time.coerce :as c]
              [clj-time.core :as t]))
 
@@ -26,23 +23,6 @@
 
 (defn apply-query [db query]
     (apply d/q (first query) db (rest query)))
-
-(defn dispatch-query [tube query res]
-  (remote/dispatch tube [query res]))
-
-(defn reg-query [tube conn query]
-  (if (not (@client-queries (:id tube)))
-    (swap! client-queries assoc (:id tube) #{query})
-    (swap! client-queries update (:id tube) conj query))
-  (dispatch-query tube query (apply-query (d/db conn) query)))
-
-(defn monitor-db-change [conn]
-  (let [report-queue (d/tx-report-queue conn)]
-    (while true
-      (let [report (.take report-queue)]
-        (println "new report in queue")
-        (doseq [[tube cq] @client-queries]
-          (dispatch-query tube cq (apply-query (:db-after report) cq)))))))
 
 (defn get-current-rundbrief-name [db]
   (let [rundbrief-resources (d/q (quote [:find ?rundbrief-file-name ?rundbrief-instant
