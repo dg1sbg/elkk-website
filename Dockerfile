@@ -59,6 +59,11 @@ ENV ELKKWEB_JARFILE server-${ELKKWEB_JARFILE_VERSION}-SNAPSHOT-standalone.jar
 # /var/data/db/datomic/data -> Datomic DB data root directory
 
 RUN mkdir -p ${ELKKWEB_DATA_ROOT}
+
+RUN chown -R $USER:$GROUP ${ELKKWEB_DATA_ROOT}
+
+# --- DIRECTORY SETUP - CONT'D ---
+
 RUN mkdir -p ${ELKKWEB_INFOLETTER_DIR}
 RUN mkdir -p ${ELKKWEB_RESOURCES_DIR}
 RUN mkdir -p ${ELKKWEB_HOME}
@@ -67,7 +72,6 @@ RUN mkdir -p ${ELKKWEB_HOME}
 
 RUN addgroup --gid 50003 ${ELKKWEB_GROUP}
 RUN adduser  --uid 50003 --gid 50003 --disabled-password --disabled-login ${ELKKWEB_USER}
-
 RUN chown -R ${ELKKWEB_USER}:${ELKKWEB_GROUP}  ${ELKKWEB_DATA_ROOT}
 
 # --- SETUP CONTENT ---
