@@ -116,8 +116,8 @@
                       "unterstuetzung"  (:support route-handlers)
                       "rundbriefarchiv" (:rundbriefarchiv route-handlers)
                       "impressum"       (:impressum route-handlers)
-                      "resources/"      (:resources route-handlers)
-                      "rundbriefe/"     (:rundbriefe route-handlers)
+                      "resources"      (:resources route-handlers)
+                      "rundbriefe"     (:rundbriefe route-handlers)
                       "post-rundbrief"   (fn [req]
                                             (let [file ((:multipart-params req) "file")
                                                   comment ((:multipart-params req) "comment")
