@@ -30,7 +30,8 @@ RUN apt-get update && apt-get install -y \
   net-tools \
   telnet \
   netcat \
-  default-jre
+  default-jre \
+  && rm -rf /var/lib/apt/lists/*
 
 # --- GLOBAL ENV SETUP ---
 
@@ -49,6 +50,7 @@ ENV ELKKWEB_USER elkkweb
 ENV ELKKWEB_GROUP elkkweb
 ENV ELKKWEB_JARFILE_VERSION 0.1.0
 ENV ELKKWEB_JARFILE server-${ELKKWEB_JARFILE_VERSION}-SNAPSHOT-standalone.jar
+ENV ELKKWEB_DOCKER_INSTALL_LOG /tmp/docker-install.log
 
 # --- DIRECTORY SETUP ---
 
@@ -58,32 +60,32 @@ ENV ELKKWEB_JARFILE server-${ELKKWEB_JARFILE_VERSION}-SNAPSHOT-standalone.jar
 #
 # /var/data/db/datomic/data -> Datomic DB data root directory
 
-RUN mkdir -p ${ELKKWEB_DATA_ROOT}
+RUN mkdir -p ${ELKKWEB_DATA_ROOT} 2>&1 | tee ${ELKKWEB_DOCKER_INSTALL_LOG}
 
-RUN chown -R $USER:$GROUP ${ELKKWEB_DATA_ROOT}
+# RUN chown -R $USER:$GROUP ${ELKKWEB_DATA_ROOT}
 
 # --- DIRECTORY SETUP - CONT'D ---
 
-RUN mkdir -p ${ELKKWEB_INFOLETTER_DIR}
-RUN mkdir -p ${ELKKWEB_RESOURCES_DIR}
-RUN mkdir -p ${ELKKWEB_HOME}
+RUN mkdir -p ${ELKKWEB_INFOLETTER_DIR} 2>&1 | tee -a ${ELKKWEB_DOCKER_INSTALL_LOG}
+RUN mkdir -p ${ELKKWEB_RESOURCES_DIR}  2>&1 | tee -a ${ELKKWEB_DOCKER_INSTALL_LOG}
+RUN mkdir -p ${ELKKWEB_HOME}           2>&1 | tee -a ${ELKKWEB_DOCKER_INSTALL_LOG}
 
 # --- USER & GROUP SETUP ---
 
-RUN addgroup --gid 50003 ${ELKKWEB_GROUP}
-RUN adduser  --uid 50003 --gid 50003 --disabled-password --disabled-login ${ELKKWEB_USER}
-RUN chown -R ${ELKKWEB_USER}:${ELKKWEB_GROUP}  ${ELKKWEB_DATA_ROOT}
+RUN addgroup --gid 50003 ${ELKKWEB_GROUP} 2>&1 | tee -a ${ELKKWEB_DOCKER_INSTALL_LOG}
+RUN adduser  --uid 50003 --gid 50003 --disabled-password --disabled-login ${ELKKWEB_USER} 2>&1 | tee -a ${ELKKWEB_DOCKER_INSTALL_LOG}
+RUN chown -R ${ELKKWEB_USER}:${ELKKWEB_GROUP}  ${ELKKWEB_DATA_ROOT} 2>&1 | tee -a ${ELKKWEB_DOCKER_INSTALL_LOG}
 
 # --- SETUP CONTENT ---
 
-RUN mkdir ${ELKKWEB_HOME}/lib
+RUN mkdir ${ELKKWEB_HOME}/lib 2>&1 | tee -a ${ELKKWEB_DOCKER_INSTALL_LOG}
 
-COPY resources/elkk_res/public ${ELKKWEB_RESOURCES_DIR}
-COPY src ${ELKKWEB_HOME}/src
-COPY build/${ELKKWEB_JARFILE} ${ELKKWEB_HOME}/lib/${ELKKWEB_JARFILE}
+COPY resources/elkk_res/public ${ELKKWEB_RESOURCES_DIR}/ 2>&1 | tee -a ${ELKKWEB_DOCKER_INSTALL_LOG}
+COPY src ${ELKKWEB_HOME}/src/ 2>&1 | tee -a ${ELKKWEB_DOCKER_INSTALL_LOG}
+COPY build/${ELKKWEB_JARFILE} ${ELKKWEB_HOME}/lib/${ELKKWEB_JARFILE} 2>&1 | tee -a ${ELKKWEB_DOCKER_INSTALL_LOG}
 
 
-RUN chown -R ${ELKKWEB_USER}:${ELKKWEB_GROUP}  ${ELKKWEB_HOME}
+RUN chown -R ${ELKKWEB_USER}:${ELKKWEB_GROUP}  ${ELKKWEB_HOME} 2>&1 | tee -a ${ELKKWEB_DOCKER_INSTALL_LOG}
 
 # --- EXPOSURE ---
 
