@@ -59,43 +59,29 @@
                       (case page-keyword
                             :home            (wrap-page
                                                 (list
-                                                  [:meta {:name "description"
-                                                           :content "Wir unterstützen Straßenkinder in Kenia auf ihrem Weg zurück in ein geordnetes Leben."}]
-                                                  [:meta {:name "author"
-                                                           :content "Eldoret Kids Kenia e.V."}]
+
                                                   [:title "Eldoret Kids Kenia e.V. - Start"])
                                                 (build-page (pages/home (d/db conn))))
                             :org             (wrap-page
                                                 (list
-                                                 [:meta {:name "description"
-                                                         :content "Am 11.09.2013 in Bempflingen gegründet, unterstützt der Eldoret Kids Kenia e.V. die Arbeit mit Straßenkindern in Eldoret/Kenia, vor allem die Arbeit im Rehabilitationszentrum \"Badilisha Maisha Centre\"."}]
-                                                 [:meta {:name "author"
-                                                         :content "Eldoret Kids Kenia e.V."}]
+
                                                  [:title "Eldoret Kids Kenia e.V. - Verein"])
                                                 (build-page (pages/org (d/db conn))))
                             :project         (wrap-page
-                                                [[:meta {:name "description"
-                                                         :content "Das Badilisha Maisha Centre nimmt Kinder auf, die durch widrige Umstände auf der Straße leben müssen. In der Einrichtung lernen sie, ohne Drogenkonsum zu leben und wieder einem geregelten Tagesablauf nachzugehen."}]
-                                                 [:meta {:name "author"
-                                                         :content "Eldoret Kids Kenia e.V."}]
-                                                 [:title "Eldoret Kids Kenia e.V. - Projekt"]]
+
+                                                 [:title "Eldoret Kids Kenia e.V. - Projekt"]
                                                 (build-page (pages/project (d/db conn))))
                             :support         (wrap-page
-                                                [[:meta {:name "description"
-                                                         :content "Ihre Spende kommt auf direktem Wege in voller Höhe dem Projekt zugute. Spenden können Sie durch eine Überweisung des gewünschten Betrags auf unser Spendenkonto."}]
-                                                 [:meta {:name "author"
-                                                         :content "Eldoret Kids Kenia e.V."}]
-                                                 [:title "Eldoret Kids Kenia e.V. - Unterstützung"]]
+
+                                                 [:title "Eldoret Kids Kenia e.V. - Unterstützung"]
                                                 (build-page (pages/support (d/db conn))))
                             :rundbriefarchiv (wrap-page
-                                                [[:meta {:name "author"
-                                                         :content "Eldoret Kids Kenia e.V."}]
-                                                 [:title "Eldoret Kids Kenia e.V. - Rundbriefarchiv"]]
+
+                                                 [:title "Eldoret Kids Kenia e.V. - Rundbriefarchiv"]
                                                 (build-page (pages/rundbriefarchiv (d/db conn))))
                             :impressum       (wrap-page
-                                                [[:meta {:name "author"
-                                                         :content "Eldoret Kids Kenia e.V."}]
-                                                 [:title "Eldoret Kids Kenia e.V. - Impressum"]]
+
+                                                 [:title "Eldoret Kids Kenia e.V. - Impressum"]
                                                 (build-page (pages/impressum (d/db conn))))))})
 
 
@@ -153,9 +139,10 @@
 
 (defn -main
   [& args]
+  (println "starting with environment: ")
+  (println env)
   (let [conn (db-core/startup-in-memory-db env)]
    (def conn conn))
-  #_(db-api/transact conn (setup/init-data conn))
   (serve app {:port (read-string (env "ELKKWEB_SERVER_PORT"))
               :open-browser? false})
   (println "started server"))
