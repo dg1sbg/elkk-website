@@ -69,7 +69,7 @@ COPY build/${ELKKWEB_JARFILE} ${ELKKWEB_HOME}/lib/${ELKKWEB_JARFILE}
 # --- USER & GROUP SETUP ---
 
 RUN addgroup --gid 50003 ${ELKKWEB_GROUP}
-RUN adduser  --uid 50003 --gid 50003 --disabled-password --disabled-login --defaults ${ELKKWEB_USER}
+RUN adduser  --uid 50003 --gid 50003 --inactive -1 --comment "ELKKWEB Application User" ${ELKKWEB_USER}
 
 # --- SETUP DIRECTORY PERMISSIONS ---
 
