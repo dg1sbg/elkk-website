@@ -32,10 +32,6 @@
                                  db)
         merged-ress (map zipmap (repeat [:rundbrief/file-name :rundbrief/instant]) rundbrief-resources)
         sorted-ress (sort-by (comp - #(c/to-long (c/from-date %)) :rundbrief/instant) merged-ress)]
-   (println "rundbrief name result: ")
-   (println rundbrief-resources)
-   (println "database: ")
-   (println db)
    (:rundbrief/file-name (first (take 1 sorted-ress)))))
 
 (defn get-rundbriefe [db]
@@ -61,18 +57,17 @@
 
 (defn get-event [db]
   (let [event-resources (d/q (quote [:find ?event-title ?event-description ?event-location ?event-instant
-                                     :in $
+                                     :in $ ?now
                                      :where [?event :event/title ?event-title]
                                             [?event :event/description ?event-description]
                                             [?event :event/location ?event-location]
-                                            [?event :event/instant ?event-instant]])
-                             db)
-        _ (println "event-resources: " event-resources)
+                                            [?event :event/instant ?event-instant]
+                                            [(.after ^java.util.Date ?event-instant ?now)]])
+                             db
+                             (java.util.Date.))
+
         merged-ress (map zipmap (repeat [:event/title :event/description :event/location :event/instant]) event-resources)
-        _ (println "merged resources: " merged-ress)
-        filtered-ress (filter #(not (pos? (- (c/to-long (t/minus (c/from-date (java.util.Date.)) (t/days 1))) (c/to-long (:event/instant %))))) merged-ress)
         sorted-ress (sort-by (comp + #(c/to-long (c/from-date %)) :event/instant) merged-ress)]
-     (println "sorted resources: " sorted-ress)
      (take 3 sorted-ress)))
 
 (defn get-news
