@@ -62,7 +62,7 @@ ENV ELKKWEB_DOCKER_INSTALL_LOG /tmp/docker-install.log
 
 RUN mkdir -p ${ELKKWEB_DATA_ROOT}
 
-RUN chmod o+x ${ELKKWEB_DATA_ROOT}
+RUN chmod -R 770 ${ELKKWEB_DATA_ROOT}
 
 # --- DIRECTORY SETUP - CONT'D ---
 
