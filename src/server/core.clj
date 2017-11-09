@@ -115,7 +115,7 @@
                                                 (println "password checked")
                                                 (println "moving on")
                                                 (println "auth: " auth " facts: " facts " file: " file)
-                                                (println (clojure.java.io/copy (:tempfile file) (clojure.java.io/file (str (env "ELKKWEB_INFOLETTER_DIR") (:filename file)))))
+                                                (println (clojure.java.io/copy (:tempfile file) (clojure.java.io/file (str (env "ELKKWEB_INFOLETTER_DIR") "/" (:filename file)))))
                                                 (db-api/transact conn facts)))
                                           {:status "200" :body req})
                       "post"             (fn [req]
