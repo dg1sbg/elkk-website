@@ -60,15 +60,15 @@ ENV ELKKWEB_DOCKER_INSTALL_LOG /tmp/docker-install.log
 #
 # /var/data/db/datomic/data -> Datomic DB data root directory
 
-RUN mkdir -p ${ELKKWEB_DATA_ROOT}
+RUN /bin/bash -c "mkdir -p ${ELKKWEB_DATA_ROOT}"
 
 # RUN chmod -R 775 ${ELKKWEB_DATA_ROOT}
 
 # --- DIRECTORY SETUP - CONT'D ---
 
-RUN mkdir -p ${ELKKWEB_INFOLETTER_DIR}
-RUN mkdir -p ${ELKKWEB_RESOURCES_DIR}
-RUN mkdir -p ${ELKKWEB_HOME}
+RUN /bin/bash -c "mkdir -p ${ELKKWEB_INFOLETTER_DIR}"
+RUN /bin/bash -c "mkdir -p ${ELKKWEB_RESOURCES_DIR}"
+RUN /bin/bash -c "mkdir -p ${ELKKWEB_HOME}"
 
 # --- USER & GROUP SETUP ---
 
@@ -78,7 +78,7 @@ RUN mkdir -p ${ELKKWEB_HOME}
 
 # --- SETUP CONTENT ---
 
-RUN mkdir -p ${ELKKWEB_HOME}/lib
+RUN /bin/bash -c "mkdir -p ${ELKKWEB_HOME}/lib"
 
 COPY resources/elkk_res/public/ ${ELKKWEB_RESOURCES_DIR}/
 COPY src ${ELKKWEB_HOME}/src
