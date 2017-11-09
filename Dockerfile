@@ -62,6 +62,8 @@ ENV ELKKWEB_DOCKER_INSTALL_LOG /tmp/docker-install.log
 
 RUN mkdir -p ${ELKKWEB_DATA_ROOT}
 
+RUN chmod -R 770 ${ELKKWEB_DATA_ROOT}
+
 # --- DIRECTORY SETUP - CONT'D ---
 
 RUN mkdir -p ${ELKKWEB_INFOLETTER_DIR}
@@ -78,7 +80,7 @@ RUN chown -R ${ELKKWEB_USER}:${ELKKWEB_GROUP} ${ELKKWEB_DATA_ROOT}
 
 RUN mkdir -p ${ELKKWEB_HOME}/lib
 
-COPY resources/elkk_res/public/* ${ELKKWEB_RESOURCES_DIR}/
+COPY resources/elkk_res/public/ ${ELKKWEB_RESOURCES_DIR}/
 COPY src ${ELKKWEB_HOME}/src
 COPY build/${ELKKWEB_JARFILE} ${ELKKWEB_HOME}/lib/${ELKKWEB_JARFILE}
 
