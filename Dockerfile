@@ -62,7 +62,7 @@ ENV ELKKWEB_DOCKER_INSTALL_LOG /tmp/docker-install.log
 
 RUN mkdir -p ${ELKKWEB_DATA_ROOT}
 
-RUN chmod -R 775 ${ELKKWEB_DATA_ROOT}
+# RUN chmod -R 775 ${ELKKWEB_DATA_ROOT}
 
 # --- DIRECTORY SETUP - CONT'D ---
 
@@ -72,9 +72,9 @@ RUN mkdir -p ${ELKKWEB_HOME}
 
 # --- USER & GROUP SETUP ---
 
-RUN addgroup --gid 50003 ${ELKKWEB_GROUP}
-RUN adduser  --uid 50003 --gid 50003 --disabled-password --disabled-login --defaults ${ELKKWEB_USER}
-RUN chown -R ${ELKKWEB_USER}:${ELKKWEB_GROUP} ${ELKKWEB_DATA_ROOT}
+# RUN addgroup --gid 50003 ${ELKKWEB_GROUP}
+# RUN adduser  --uid 50003 --gid 50003 --disabled-password --disabled-login --defaults ${ELKKWEB_USER}
+# RUN chown -R ${ELKKWEB_USER}:${ELKKWEB_GROUP} ${ELKKWEB_DATA_ROOT}
 
 # --- SETUP CONTENT ---
 
@@ -84,7 +84,7 @@ COPY resources/elkk_res/public/ ${ELKKWEB_RESOURCES_DIR}/
 COPY src ${ELKKWEB_HOME}/src
 COPY build/${ELKKWEB_JARFILE} ${ELKKWEB_HOME}/lib/${ELKKWEB_JARFILE}
 
-RUN chown -R ${ELKKWEB_USER}:${ELKKWEB_GROUP}  ${ELKKWEB_HOME}
+# RUN chown -R ${ELKKWEB_USER}:${ELKKWEB_GROUP}  ${ELKKWEB_HOME}
 
 # --- EXPOSURE ---
 
@@ -93,7 +93,7 @@ EXPOSE 3003
 
 # --- RUN ---
 
-USER ${ELKKWEB_USER}
+# USER ${ELKKWEB_USER}
 WORKDIR ${ELKKWEB_HOME}
 
 # ----------------------------------------------------------------------------
