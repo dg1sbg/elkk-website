@@ -70,7 +70,7 @@
         _ (println "event-resources: " event-resources)
         merged-ress (map zipmap (repeat [:event/title :event/description :event/location :event/instant]) event-resources)
         _ (println "merged resources: " merged-ress)
-        filtered-ress (filter #(not (pos? (- (c/to-long (t/minus (t/today) (t/days 1))) (c/to-long (:event/instant %))))) merged-ress)
+        filtered-ress (filter #(not (pos? (- (c/to-long (t/minus (c/from-date (java.util.Date.)) (t/days 1))) (c/to-long (:event/instant %))))) merged-ress)
         sorted-ress (sort-by (comp + #(c/to-long (c/from-date %)) :event/instant) merged-ress)]
      (println "sorted resources: " sorted-ress)
      (take 3 sorted-ress)))
