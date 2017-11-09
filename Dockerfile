@@ -42,7 +42,7 @@ RUN apt-get update && apt-get install -y \
 ENV ELKKWEB_HOME /opt/elkkweb
 ENV ELKKWEB_DATA_ROOT /var/data/www/elkkweb
 ENV ELKKWEB_INFOLETTER_DIR ${ELKKWEB_DATA_ROOT}/newsletters
-ENV ELKKWEB_RESOURCES_DIR ${ELKKWEB_DATA_ROOT}/resources
+ENV ELKKWEB_RESOURCES_DIR ${ELKKWEB_HOME}/resources
 ENV ELKKWEB_LIB_DIR ${ELKKWEB_HOME}/lib
 ENV ELKKWEB_SERVER_PORT 3003
 ENV ELKKWEB_DATOMIC_URI datomic:ddb://eu-central-1/eldoret-kids-net-website-db/elkkweb
@@ -54,37 +54,27 @@ ENV ELKKWEB_DOCKER_INSTALL_LOG /tmp/docker-install.log
 
 # --- DIRECTORY SETUP ---
 
-# Directory Layout in Docker Container:
-#
-# ROOT DIRECTORY FOR DATA: /var/data
-#
-# /var/data/db/datomic/data -> Datomic DB data root directory
-
 RUN mkdir -p ${ELKKWEB_DATA_ROOT}
-
-RUN chmod -R 775 ${ELKKWEB_DATA_ROOT}
-
-# --- DIRECTORY SETUP - CONT'D ---
-
-RUN mkdir -p ${ELKKWEB_INFOLETTER_DIR}
-RUN mkdir -p ${ELKKWEB_RESOURCES_DIR}
 RUN mkdir -p ${ELKKWEB_HOME}
+RUN mkdir -p ${ELKKWEB_INFOLETTER_DIR}
+RUN mkdir -p ${ELKKWEB_HOME}/lib
+RUN mkdir -p ${ELKKWEB_RESOURCES_DIR}
+
+# --- SETUP CONTENT ---
+
+COPY resources/elkk_res/public ${ELKKWEB_RESOURCES_DIR}
+COPY src ${ELKKWEB_HOME}/src
+COPY build/${ELKKWEB_JARFILE} ${ELKKWEB_HOME}/lib/${ELKKWEB_JARFILE}
 
 # --- USER & GROUP SETUP ---
 
 RUN addgroup --gid 50003 ${ELKKWEB_GROUP}
 RUN adduser  --uid 50003 --gid 50003 --disabled-password --disabled-login --defaults ${ELKKWEB_USER}
+
+# --- SETUP DIRECTORY PERMISSIONS ---
+
+RUN chown -R ${ELKKWEB_USER}:${ELKKWEB_GROUP} ${ELKKWEB_HOME}
 RUN chown -R ${ELKKWEB_USER}:${ELKKWEB_GROUP} ${ELKKWEB_DATA_ROOT}
-
-# --- SETUP CONTENT ---
-
-RUN mkdir -p ${ELKKWEB_HOME}/lib
-
-COPY resources/elkk_res/public/ ${ELKKWEB_RESOURCES_DIR}/
-COPY src ${ELKKWEB_HOME}/src
-COPY build/${ELKKWEB_JARFILE} ${ELKKWEB_HOME}/lib/${ELKKWEB_JARFILE}
-
-RUN chown -R ${ELKKWEB_USER}:${ELKKWEB_GROUP}  ${ELKKWEB_HOME}
 
 # --- EXPOSURE ---
 
