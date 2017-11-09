@@ -14,7 +14,7 @@ FROM debian:stable
 
 LABEL title="ElKK WEB - http://www.eldoret-kids.de"
 LABEL description="Web Site of Eldoret Kids Kenia e.V., Bempflingen, Germany"
-LABEL version="A.01.00"
+LABEL version="A.02.00"
 LABEL maintainer="Marian Goenninger <marian.goenninger@goenninger.net>"
 LABEL disclaimer="This website is displaying the project description and general information of a not-for-profit charity organization that supports street children in Kenya. The website is hosted in Germany. German law applies in all cases and under all circumstances. By visiting this website you agree to these regulations."
 
@@ -60,47 +60,39 @@ ENV ELKKWEB_DOCKER_INSTALL_LOG /tmp/docker-install.log
 #
 # /var/data/db/datomic/data -> Datomic DB data root directory
 
-RUN mkdir -p ${ELKKWEB_DATA_ROOT} 2>&1 | tee ${ELKKWEB_DOCKER_INSTALL_LOG}
-
-# RUN chown -R $USER:$GROUP ${ELKKWEB_DATA_ROOT}
+RUN mkdir -p ${ELKKWEB_DATA_ROOT}
 
 # --- DIRECTORY SETUP - CONT'D ---
 
-RUN mkdir -p ${ELKKWEB_INFOLETTER_DIR} 2>&1 | tee -a ${ELKKWEB_DOCKER_INSTALL_LOG}
-RUN mkdir -p ${ELKKWEB_RESOURCES_DIR} 2>&1 | tee -a ${ELKKWEB_DOCKER_INSTALL_LOG}
-RUN mkdir -p ${ELKKWEB_HOME} 2>&1 | tee -a ${ELKKWEB_DOCKER_INSTALL_LOG}
+RUN mkdir -p ${ELKKWEB_INFOLETTER_DIR}
+RUN mkdir -p ${ELKKWEB_RESOURCES_DIR}
+RUN mkdir -p ${ELKKWEB_HOME}
 
 # --- USER & GROUP SETUP ---
 
-RUN addgroup --gid 50003 ${ELKKWEB_GROUP} 2>&1 | tee -a ${ELKKWEB_DOCKER_INSTALL_LOG}
-RUN adduser  --uid 50003 --gid 50003 --disabled-password --disabled-login ${ELKKWEB_USER} 2>&1 | tee -a ${ELKKWEB_DOCKER_INSTALL_LOG}
-RUN chown -R ${ELKKWEB_USER}:${ELKKWEB_GROUP}  ${ELKKWEB_DATA_ROOT} 2>&1 | tee -a ${ELKKWEB_DOCKER_INSTALL_LOG}
+RUN addgroup --gid 50003 ${ELKKWEB_GROUP}
+RUN adduser  --uid 50003 --gid 50003 --disabled-password --disabled-login ${ELKKWEB_USER}
+RUN chown -R ${ELKKWEB_USER}:${ELKKWEB_GROUP} ${ELKKWEB_DATA_ROOT}
 
 # --- SETUP CONTENT ---
 
-RUN mkdir ${ELKKWEB_HOME}/lib 2>&1 | tee -a ${ELKKWEB_DOCKER_INSTALL_LOG}
+RUN mkdir -p ${ELKKWEB_HOME}/lib
 
-COPY resources/elkk_res/public ${ELKKWEB_RESOURCES_DIR}/ 2>&1 | tee -a ${ELKKWEB_DOCKER_INSTALL_LOG}
-COPY src ${ELKKWEB_HOME}/src/ 2>&1 | tee -a ${ELKKWEB_DOCKER_INSTALL_LOG}
-COPY build/${ELKKWEB_JARFILE} ${ELKKWEB_HOME}/lib/${ELKKWEB_JARFILE} 2>&1 | tee -a ${ELKKWEB_DOCKER_INSTALL_LOG}
+COPY resources/elkk_res/public/* ${ELKKWEB_RESOURCES_DIR}/
+COPY src ${ELKKWEB_HOME}/src
+COPY build/${ELKKWEB_JARFILE} ${ELKKWEB_HOME}/lib/${ELKKWEB_JARFILE}
 
-RUN chown -R ${ELKKWEB_USER}:${ELKKWEB_GROUP}  ${ELKKWEB_HOME} 2>&1 | tee -a ${ELKKWEB_DOCKER_INSTALL_LOG}
+RUN chown -R ${ELKKWEB_USER}:${ELKKWEB_GROUP}  ${ELKKWEB_HOME}
 
 # --- EXPOSURE ---
 
 VOLUME ${ELKKWEB_DATA_ROOT}
-# VOLUME ${ELKKWEB_INFOLETTER_DIR}
-# VOLUME ${ELKKWEB_RESOURCES_DIR}
-# VOLUME ${ELKKWEB_HOME}
-
 EXPOSE 3003
-
-USER ${ELKKWEB_USER}
 
 # --- RUN ---
 
+USER ${ELKKWEB_USER}
 WORKDIR ${ELKKWEB_HOME}
-# ENTRYPOINT ["java", "-jar"]
 
 # ----------------------------------------------------------------------------
 #  START RUNTIME
