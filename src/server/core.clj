@@ -106,7 +106,7 @@
                       "rundbriefe/"     (:rundbriefe route-handlers)
                       "post-rundbrief"   (fn [req]
                                             (let [file ((:multipart-params req) "file")
-                                                  comment ((:multipart-params req) "comment")
+                                                  comment (read-string ((:multipart-params req) "comment"))
                                                   auth (:auth comment)
                                                   facts (:facts comment)]
                                               (println "multiparts: ")
