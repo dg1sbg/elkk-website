@@ -5,11 +5,5 @@
       "ContainerPort": "3003"
     }
   ],
-  "Volumes": [
-    {
-      "HostDirectory": "/var/app/elkkweb",
-      "ContainerDirectory": "/var/data/www/elkkweb"
-    }
-  ],
   "Logging": "/var/log/nginx"
 }

@@ -68,8 +68,8 @@ COPY build/${ELKKWEB_JARFILE} ${ELKKWEB_HOME}/lib/${ELKKWEB_JARFILE}
 
 # --- USER & GROUP SETUP ---
 
-RUN addgroup --gid 50003 ${ELKKWEB_GROUP}
-RUN adduser  --uid 50003 --gid 50003 --inactive -1 --comment "ELKKWEB Application User" ${ELKKWEB_USER}
+# RUN addgroup --gid 50003 ${ELKKWEB_GROUP}
+# RUN adduser  --uid 50003 --gid 50003 --inactive -1 --comment "ELKKWEB Application User" ${ELKKWEB_USER}
 
 # --- SETUP DIRECTORY PERMISSIONS ---
 
@@ -83,7 +83,7 @@ EXPOSE 3003
 
 # --- RUN ---
 
-USER ${ELKKWEB_USER}
+# USER ${ELKKWEB_USER}
 WORKDIR ${ELKKWEB_HOME}
 
 # ----------------------------------------------------------------------------
