@@ -1,0 +1,9 @@
+sudo certbot certonly --manual -d www.eldoret-kids.de
+
+Create a file containing just this data:
+
+GzbycvQBZZ3NVa0GZ4cSJ-VmmQob6tahHnL4dzrZvxw.KCz0MQf-e-kCC0rKYAywy0HLmLXP6gp3LWiJkdkY0yE -  das ändert sich jedesmal!
+
+And make it available on your web server at this URL:
+
+http://www.eldoret-kids.de/.well-known/acme-challenge/GzbycvQBZZ3NVa0GZ4cSJ-VmmQob6tahHnL4dzrZvxw
