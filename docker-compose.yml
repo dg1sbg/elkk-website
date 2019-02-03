@@ -6,7 +6,6 @@ networks:
 services:
 
   postgres:
-    user: postgres
     image: gbtmago/datomic-postgres
     build:
       context: .
@@ -17,7 +16,6 @@ services:
       - /var/data/db/postgres/data:/var/data/db/postgres/data
 
   datomic:
-    user: datomic
     image: gbtmago/datomic
     build:
       context: .
@@ -30,7 +28,6 @@ services:
       - /var/data/db/datomic/data:/var/data/db/datomic/data
 
   elkkweb:
-    user: www
     image: gbtmago/elkkweb
     build:
       context: .
