@@ -1,0 +1,489 @@
+a {
+  text-decoration: none;
+  color: inherit;
+  cursor: pointer;
+}
+
+a:link {
+  text-decoration: none;
+  color: inherit;
+  cursor: pointer;
+}
+
+a:active {
+  text-decoration: none;
+  color: inherit;
+  cursor: pointer;
+}
+
+a:visited {
+  text-decoration: none;
+  color: inherit;
+  cursor: pointer;
+}
+
+button {
+  cursor: pointer;
+}
+
+html {
+  padding: 0;
+  margin: 0;
+}
+
+body
+{
+    margin: 0;
+    padding: 0;
+    font-family: 'Nunito', sans-serif;
+    font-size: 12pt;
+    color: #363939;
+}
+
+@media (min-width:768px)
+{
+    .slogan-text
+    {
+        color: white;
+    }
+    .slogan
+    {
+        font-size: 18pt;
+        font-weight: lighter;
+        color: white;
+    }
+    .slogan-sub
+    {
+        color: #e1e1e1;
+    }
+}
+
+@media (max-width:767px)
+{
+    .slogan
+    {
+        font-size: 18pt;
+        font-weight: lighter;
+        margin-top: 15px;
+        margin-bottom: 10px;
+    }
+    .slogan-sub
+    {
+        color: #808080;
+        font-size: 12pt;
+    }
+}
+
+
+.flexbox {
+    display: flex;
+    display: -webkit-flex;
+}
+
+.flex-1
+{
+    flex: 1;
+    -webkit-flex: 1;
+
+}
+
+.flex-2
+{
+    flex: 2;
+    -webkit-flex: 2
+}
+
+.flex-direction-column
+{
+    flex-direction: column;
+}
+
+.flex-wrap
+{
+    flex-wrap: wrap;
+}
+
+.background-black
+{
+    background-color: #363939;
+}
+
+.background-green
+{
+    background-color: #2e8040;
+}
+
+.background-red
+{
+    background-color: #cd373c;
+}
+
+.leadline
+{
+    height: 10px;
+}
+
+.name
+{
+    padding-left: 10px;
+    font-size: 12pt;
+    line-height: 45px;
+    min-width: 200px;
+    width: 200px;
+}
+
+.header-right
+{
+    font-size: 11pt;
+    min-width: 300px;
+}
+
+.header-right-img
+{
+    width: 20px;
+    height: 20px;
+    margin-top: 25px;
+    margin-right: 3px;
+}
+
+.quicklink-span
+{
+    text-decoration: underline;
+    font-size: 11pt;
+}
+
+.nav-element
+{
+    font-size: 12pt;
+    text-align: center;
+    background-color: #eee;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    height: 40px;
+    line-height: 20px;
+}
+
+.logo
+{
+    width: auto;
+    height: 100%;
+}
+
+.nav-element:hover
+{
+    color: white;
+    background-color: #cd373c;
+}
+
+.max-width-100
+{
+    max-width: 100%;
+}
+
+.nav
+{
+    margin-top: 10px;
+}
+
+
+
+.button
+{
+    padding: 5px;
+    font-size: 12pt;
+    font-family: 'Nunito', sans-serif;
+    border: none;
+    background-color: #2e8040;
+    margin-top: 10px;
+    color: white;
+}
+
+.section-heading
+{
+    font-size: 12pt;
+    margin-bottom: 0px;
+    color: #aaa;
+    margin-top: 10px;
+}
+
+.col
+{
+    word-wrap: break-word;
+    margin-right: 10px;
+    max-width: 100%;
+    margin-bottom: 15px;
+    padding: 10px;
+    min-width: 270px;
+}
+
+.span
+{
+    display: block;
+}
+
+.title-section
+{
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-image: url('../title.png');
+    padding-left: 20px;
+    padding-right: 20px;
+    background-position: center;
+}
+
+.section-icon
+{
+    width: 50px;
+    height: 50px;
+    min-width: 50px;
+    max-height: 50px;
+    background-repeat: no-repeat;
+    background-size: contain;
+    max-width: 50px;
+    min-height: 50px;
+    margin-top: 10px;
+    margin-right: 15px;
+}
+
+.evt-day
+{
+    font-size: 20pt;
+    font-family: 'Quicksand',sans-serif;
+    color: #cd373c;
+    width: 50px;
+    text-align: center;
+}
+
+.section-heading-bold
+{
+    font-weight: lighter;
+    font-size: 16pt;
+    margin-top: 0px;
+    margin-bottom: 10px;
+}
+
+.evt-heading
+{
+    color: #cd373c;
+}
+
+.evt-icon
+{
+    background-image: url('../iconmonstr-calendar-6-240.png');
+    padding-top: 19px;
+}
+
+.good-icon
+{
+    background-image: url('../noun_4060.png');
+}
+
+.good-heading
+{
+    color: #9aca27;
+}
+
+.section-margin-top
+{
+    margin-top: 15px;
+}
+
+.support-flex
+{
+}
+
+.evt-button
+{
+    background-color: #cd373c;
+}
+
+.good-button
+{
+    background-color: #9aca27;
+}
+
+.section-heading-alt
+{
+    margin-top: 10px;
+}
+
+.news-icon
+{
+    background-image: url('../iconmonstr-newspaper-4-240.png');
+}
+
+.normal-section-heading
+{
+    color: #2e8040;
+}
+
+.news
+{
+    padding-bottom: 10px;
+}
+
+.news-heading
+{
+    font-weight: bold;
+    margin-bottom: 5px;
+    margin-top: 10px;
+}
+
+.header-top-inner
+{
+}
+
+.header-left
+{
+    min-width: 300px;
+    height: 40px;
+    margin-bottom: 10px;
+}
+
+.full-width-col
+{
+    width: 100%;
+    min-width: 100%;
+}
+
+@media (min-width:768px) and (max-width:999px)
+{
+    .title-section-height
+    {
+        height: 400px;
+    }
+}
+
+@media (max-width:767px)
+{
+    .title-section-height
+    {
+        height: 240px;
+    }
+}
+
+.img
+{
+    max-width: 100%;
+    height: auto;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+@media (min-width: 768px)
+{
+    .slogan-outer
+    {
+        position: absolute;
+        left: 15px;
+        top: 0px;
+    }
+}
+
+.img-section
+{
+    position: relative;
+}
+
+@media (max-wdith: 767px)
+{
+    .slogan-outer
+    {
+    }
+}
+
+.icon-outer
+{
+}
+
+.icon-heading
+{
+    line-height: 25px;
+    padding-top: 13px;
+    padding-bottom: 10px;
+}
+
+.section
+{
+    margin-top: 15px;
+}
+
+.logo-name {
+  height: 100%;
+  line-height: 70px;
+}
+
+.header-row
+{
+    margin-top: 15px;
+    height: 70px;
+    line-height: 70px;
+}
+
+.rundbrief-span
+{
+    max-width: 100px;
+}
+
+.footer
+{
+    background-color: #eee;
+    margin-top: 50px;
+    line-height: 30px;
+    padding-bottom: 30px;
+}
+
+.footerelement
+{
+    font-size: 11pt;
+    text-align: right;
+}
+
+.footerlink
+{
+    text-decoration: underline;
+}
+
+.text-block
+{
+    padding-top: 15px;
+    padding-bottom: 10px;
+}
+
+.page-heading
+{
+    margin-bottom: 0px;
+}
+
+.vorstand
+{
+    text-align: center;
+    margin-top: 20px;
+}
+
+.vorstand-name
+{
+    line-height: 30px;
+}
+
+.support-info
+{
+    background-color: #eee;
+    padding: 15px;
+    margin-left: auto;
+}
+
+.context-info
+{
+    width: 300px;
+    background-color: #eee;
+    padding: 15px;
+    margin-left: 20px;
+    float: right;
+}
+
+.context-info-heading
+{
+    margin-top: 0px;
+}

@@ -1,0 +1,43 @@
+version: "3"
+
+networks:
+  elkkweb-net:
+
+services:
+
+  postgres:
+    image: gbtmago/datomic-postgres
+    build:
+      context: .
+      dockerfile: dockerfiles/datomic-postgres.dockerfile
+    networks:
+      - elkkweb-net
+    volumes:
+      - ./bindings/postgres-data-db-dir:/var/data/db/postgres/data
+
+  datomic:
+    image: gbtmago/datomic
+    build:
+      context: .
+      dockerfile: dockerfiles/datomic-pro.dockerfile
+    depends_on:
+      - "postgres"
+    networks:
+      - elkkweb-net
+    volumes:
+      - ./bindings/datomic-data-db-dir:/var/data/db/datomic/data
+
+  elkkweb:
+    image: gbtmago/elkkweb
+    build:
+      context: .
+    depends_on:
+      - "postgres"
+      - "datomic"
+    ports:
+      - "443:443"
+      - "3003:3003"
+    networks:
+      - elkkweb-net
+    volumes:
+      - ./bindings/elkkweb-data-root:/var/data/www/elkkweb
