@@ -13,7 +13,7 @@ services:
     networks:
       - elkkweb-net
     volumes:
-      - ./bindings/postgres-data-db-dir:/var/data/db/postgres/data
+      - /var/data/db/postgres/data:/var/data/db/postgres/data
 
   datomic:
     image: gbtmago/datomic
@@ -25,7 +25,7 @@ services:
     networks:
       - elkkweb-net
     volumes:
-      - ./bindings/datomic-data-db-dir:/var/data/db/datomic/data
+      - /var/data/db/datomic/data:/var/data/db/datomic/data
 
   elkkweb:
     image: gbtmago/elkkweb
@@ -40,4 +40,4 @@ services:
     networks:
       - elkkweb-net
     volumes:
-      - ./bindings/elkkweb-data-root:/var/data/www/elkkweb
+      - /var/data/www/elkkweb:/var/data/www/elkkweb
